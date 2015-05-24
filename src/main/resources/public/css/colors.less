@@ -1,0 +1,87 @@
+body {
+    background-color: #000;
+    padding:30px;
+}
+
+h1 {
+  margin:0px;
+  line-height:50px;
+  float:left;
+}
+
+.circleBase, .circleBaseMain {
+    border-radius: 50%;
+    behavior: url(PIE.htc); /* remove if you don't care about IE8 */
+    cursor: pointer;
+    margin:2px;
+    border: 2px solid #FFF;
+    height:25px;
+    width:25px;
+    float:left;
+    box-shadow: 0px 1px 4px rgba(0,0,0,1);
+
+   
+}
+
+.circleBaseMain {
+  background-color:rgba(50, 50, 50, 1);
+  height:50px;
+  width:50px;
+  text-align:center;
+  color:#FFF;
+  text-shadow: 0px 2px rgba(0,0,0,.1);
+  
+float:none;
+  vertical-align: middle;
+
+  display: table-cell;
+}
+
+.circleBase:hover, .circleBaseMain:hover { opacity: .5; }
+
+
+.well {
+    background-color: #222;
+}
+
+.gly-spin {
+    -webkit-animation: spin 4s infinite linear;
+    -moz-animation: spin 4s infinite linear;
+    -o-animation: spin 4s infinite linear;
+    animation: spin 4s infinite linear;
+}
+
+@-moz-keyframes spin {
+  0% {
+    -moz-transform: rotate(0deg);
+  }
+  100% {
+    -moz-transform: rotate(359deg);
+  }
+}
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+  }
+}
+@-o-keyframes spin {
+  0% {
+    -o-transform: rotate(0deg);
+  }
+  100% {
+    -o-transform: rotate(359deg);
+  }
+}
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
