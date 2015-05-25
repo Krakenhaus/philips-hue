@@ -18,8 +18,7 @@ public class HueSDK {
     private int status = PENDING;
 
 
-    public HueSDK(PHHueSDK phHueSDK) {
-        this.phHueSDK = phHueSDK;
+    public HueSDK() {
     }
 
     public PHBridge getSelectedBridge() {

@@ -18,7 +18,7 @@ import java.util.List;
 @Repository
 public class LightsDto {
 
-	public static final int TRANSITION_TIME = 1000; //ms
+	public static final int TRANSITION_TIME = 10; //units??
 
 	@Autowired
 	private HueSDK hueSDK;
