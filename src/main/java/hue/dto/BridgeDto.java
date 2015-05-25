@@ -11,6 +11,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class BridgeDto {
 
+    public void setHueSDK(HueSDK hueSDK) {
+        this.hueSDK = hueSDK;
+    }
+
     @Autowired
     private HueSDK hueSDK;
 

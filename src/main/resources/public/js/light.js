@@ -82,7 +82,7 @@ var fillTemplate = function(data) {
 
     $('input[name="my-checkbox"]').on('switchChange.bootstrapSwitch', function(event, state) {
        id = $(this).parent().parent().parent().data("target");
-        setColor(-1, -1, -1, -1, state, id);
+        setColor(1, 1, 1, 1, state, id);
     });
 
 

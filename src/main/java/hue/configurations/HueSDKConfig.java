@@ -16,7 +16,7 @@ import java.util.List;
 public class HueSDKConfig {
 
     private PHHueSDK phHueSDK;
-    private HueSDK hueSDK = new HueSDK(phHueSDK);
+    private HueSDK hueSDK;
 
     // TODO - Make this dynamic???
     @Value("${bridge.ip}")
@@ -29,11 +29,13 @@ public class HueSDKConfig {
     @Bean
     @PostConstruct
     public HueSDK initPHHueSDK() {
+        hueSDK = new HueSDK();
         PHHueSDK phHueSDK = PHHueSDK.create();
 
         findBridges();
         phHueSDK.getNotificationManager().registerSDKListener(getListener());
 
+        hueSDK.setPhHueSDK(phHueSDK);
         return hueSDK;
     }
 
