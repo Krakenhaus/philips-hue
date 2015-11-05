@@ -2,10 +2,11 @@ package hue.controllers;
 
 
 import com.philips.lighting.model.PHLight;
-import hue.domain.CustomLightState;
+import hue.domain.HueLight;
 import hue.domain.HueSDK;
 import hue.dto.BridgeDto;
 import hue.dto.LightsDto;
+import hue.services.PHLightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,10 +22,15 @@ public class HueController {
 	 */
 
 	@Autowired
-	LightsDto lightsDto;
+    PHLightService phLightService;
 
 	@Autowired
 	BridgeDto bridgeDto;
+
+    @RequestMapping(value = "/bridge/status", method = RequestMethod.GET)
+    public ResponseEntity<float[]> getXYFromRGB(int[] rgb) {
+
+    }
 
 	@RequestMapping(value = "/bridge/status", method = RequestMethod.GET)
 	public ResponseEntity<String> getBridgeStatus() {
@@ -37,9 +43,9 @@ public class HueController {
 	}
 
 	@RequestMapping(value = "/lights/{id}", method = RequestMethod.POST)
-	public ResponseEntity<PHLight> setLightState(@PathVariable String id, @RequestBody CustomLightState customLightState) {
+	public ResponseEntity<PHLight> setLightState(@PathVariable String id, @RequestBody HueLight customLightState) {
 		bridgeDto.checkForBridgeErrors();
-		PHLight updatedLight = lightsDto.setLightRGB(id, customLightState);
+		PHLight updatedLight = phLightService.setLightRGB(id, customLightState);
 
 		return new ResponseEntity<PHLight>(updatedLight, HttpStatus.CREATED);
 	}
@@ -47,13 +53,13 @@ public class HueController {
 	@RequestMapping(value = "/lights", method = RequestMethod.GET)
 	public ResponseEntity<List<PHLight>> getLights() {
 		bridgeDto.checkForBridgeErrors();
-		List<PHLight> lights = lightsDto.getLights();
+		List<PHLight> lights = phLightService.getLights();
 
 		return new ResponseEntity<List<PHLight>>(lights, HttpStatus.OK);
 	}
 
-	public void setLightsDto(LightsDto lightsDto) {
-		this.lightsDto = lightsDto;
+	public void setPhLightService(LightsDto phLightService) {
+		this.phLightService = phLightService;
 	}
 
 	public void setBridgeDto(BridgeDto bridgeDto) {
