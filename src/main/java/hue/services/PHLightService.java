@@ -25,6 +25,4 @@ public class PHLightService {
     public float[] convertRGBToXY(int[] rgb, String modelNumber) {
         return PHUtilities.calculateXYFromRGB(rgb[0], rgb[1], rgb[2], modelNumber);
     }
-
-
 }

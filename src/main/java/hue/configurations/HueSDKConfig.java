@@ -1,11 +1,9 @@
-package hue.configurations;
+/*package hue.configurations;
 
 import com.philips.lighting.hue.sdk.*;
 import com.philips.lighting.model.PHBridge;
 import com.philips.lighting.model.PHHueError;
 import com.philips.lighting.model.PHHueParsingError;
-import hue.domain.HueSDK;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -16,33 +14,24 @@ import java.util.List;
 public class HueSDKConfig {
 
     private PHHueSDK phHueSDK;
-    private HueSDK hueSDK;
-
-    // TODO - Make this dynamic???
-    @Value("${bridge.ip}")
-    private String ip;
-
-    // TODO - Make this dynamic???
-    @Value("${bridge.username}")
-    private String username;
 
     @Bean
     @PostConstruct
-    public HueSDK initPHHueSDK() {
-        hueSDK = new HueSDK();
-        PHHueSDK phHueSDK = PHHueSDK.create();
+    public PHHueSDK initPHHueSDK() {
+        phHueSDK = PHHueSDK.create();
 
         findBridges();
         phHueSDK.getNotificationManager().registerSDKListener(getListener());
-
-        hueSDK.setPhHueSDK(phHueSDK);
-        return hueSDK;
+        return phHueSDK;
     }
 
-    private void findBridges() {
+
+    public void findBridges() {
         phHueSDK = PHHueSDK.getInstance();
         PHBridgeSearchManager sm = (PHBridgeSearchManager) phHueSDK.getSDKService(PHHueSDK.SEARCH_BRIDGE);
         sm.search(true, true);
+
+        //connectToAccessPoint("newdeveloper", "192.168.1.7");
     }
 
     private PHSDKListener listener = new PHSDKListener() {
@@ -53,8 +42,10 @@ public class HueSDKConfig {
 
             System.out.println(username);
             PHHueSDK phHueSDK = PHHueSDK.getInstance();
-            accessPointsList.get(0).setUsername(username);
-            phHueSDK.connect(accessPointsList.get(0));
+            //accessPointsList.get(0).setUsername("newdeveloper");
+            //phHueSDK.connect(accessPointsList.get(0))
+
+            System.out.println(accessPointsList);
 
         }
 
@@ -68,15 +59,8 @@ public class HueSDKConfig {
         @Override
         public void onBridgeConnected(PHBridge bridge) {
             phHueSDK.setSelectedBridge(bridge);
-            phHueSDK.enableHeartbeat(phHueSDK.getSelectedBridge(), PHHueSDK.HB_INTERVAL);
-
-            String lastIpAddress =  bridge.getResourceCache().getBridgeConfiguration().getIpAddress();
-
-            System.out.println("found bridge");
-            System.out.println("On connected: IP " + lastIpAddress);
-            System.out.println("ip: " + lastIpAddress + ", username: " + username);
-
-            hueSDK.setStatus(HueSDK.HEALTHY);
+            //ip = bridge.getResourceCache().getBridgeConfiguration().getIpAddress();
+            phHueSDK.enableHeartbeat(bridge, PHHueSDK.HB_INTERVAL);
         }
 
         @Override
@@ -96,16 +80,16 @@ public class HueSDKConfig {
         @Override
         public void onError(int code, final String message) {
             if (code == PHHueError.BRIDGE_NOT_RESPONDING) {
-                hueSDK.setStatus(HueSDK.BRIDGE_NOT_RESPONDING);
+                //hueSDK.setStatus(HueSDK.BRIDGE_NOT_RESPONDING);
             }
             else if (code == PHMessageType.PUSHLINK_BUTTON_NOT_PRESSED) {
-                hueSDK.setStatus(HueSDK.PUSHLINK_BUTTON_NOT_PRESSED);
+                //hueSDK.setStatus(HueSDK.PUSHLINK_BUTTON_NOT_PRESSED);
             }
             else if (code == PHMessageType.PUSHLINK_AUTHENTICATION_FAILED) {
-                hueSDK.setStatus(HueSDK.PUSHLINK_AUTHENTICATION_FAILED);
+                //hueSDK.setStatus(HueSDK.PUSHLINK_AUTHENTICATION_FAILED);
             }
             else if (code == PHMessageType.BRIDGE_NOT_FOUND) {
-               hueSDK.setStatus(HueSDK.BRIDGE_NOT_FOUND);
+               //hueSDK.setStatus(HueSDK.BRIDGE_NOT_FOUND);
             }
         }
 
@@ -116,12 +100,6 @@ public class HueSDKConfig {
             }
         }
     };
-
-    public void restartHeartbeat() {
-        phHueSDK.disableHeartbeat(phHueSDK.getSelectedBridge());
-        phHueSDK.enableHeartbeat(phHueSDK.getSelectedBridge(), PHHueSDK.HB_INTERVAL);
-
-    }
 
     public PHSDKListener getListener() {
         System.out.println(listener.toString());
@@ -136,3 +114,4 @@ public class HueSDKConfig {
 
 
 
+*/

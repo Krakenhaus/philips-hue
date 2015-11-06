@@ -3,7 +3,7 @@ package hue.dto;
 
 import com.philips.lighting.model.PHLight;
 import com.philips.lighting.model.PHLightState;
-import hue.services.BridgeService;
+import hue.services.PHBridgeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -16,7 +16,7 @@ public class LightsDto {
 	public static final int TRANSITION_TIME = 10; //units??
 
 	@Autowired
-	private BridgeService bridgeService;
+	private PHBridgeService bridgeService;
 
 	public boolean updateLight(String lightId, PHLightState lightState){
         PHLight light = bridgeService.getBridgeCache().getLights().get(lightId);
