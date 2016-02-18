@@ -18,6 +18,11 @@ public class LightsDto {
 	@Autowired
 	private PHBridgeService bridgeService;
 
+	public String getModelNumber(String lightId) {
+		PHLight light = bridgeService.getBridgeCache().getLights().get(lightId);
+		return light.getModelNumber();
+	}
+
 	public boolean updateLight(String lightId, PHLightState lightState){
         PHLight light = bridgeService.getBridgeCache().getLights().get(lightId);
 		lightState.setTransitionTime(TRANSITION_TIME);

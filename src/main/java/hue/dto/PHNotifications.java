@@ -4,12 +4,12 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class PHNotifications {
-    private BridgeStatus bridgeStatus;
+    private BridgeStatus bridgeStatus = BridgeStatus.NOT_CONNECTED;
 
     public enum BridgeStatus {
+        NOT_CONNECTED("Not connected to any bridge."),
         CONNECTED("The bridge is operating normally."),
         CONNECTING("Trying to connect to the bridge..."),
-        NOT_CONNECTED("Not connected to any bridge."),
         BRIDGE_NOT_RESPONDING("The bridge is not responding."),
         PUSHLINK_BUTTON_NOT_PRESSED("The pushlink button is not pressed."),
         PUSHLINK_AUTHENTICATION_FAILED("Pushlink authentication has failed"),

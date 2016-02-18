@@ -29,10 +29,11 @@ public class PHBridgeService {
     }
 
     public boolean connectToAccessPoint(String username, String ip) {
-        this.username = username;
-        notifications.setBridgeStatus(PHNotifications.BridgeStatus.CONNECTING);
-        PHBridgeSearchManager sm = (PHBridgeSearchManager) phHueSDK.getSDKService(PHHueSDK.SEARCH_BRIDGE);
-        sm.search(true, true);
+        if(notifications.getBridgeStatus() != PHNotifications.BridgeStatus.CONNECTED) {
+            this.username = username;
+            PHBridgeSearchManager sm = (PHBridgeSearchManager) phHueSDK.getSDKService(PHHueSDK.SEARCH_BRIDGE);
+            sm.search(true, true);
+        }
         return true;
     }
 
@@ -47,6 +48,7 @@ public class PHBridgeService {
         public void onAccessPointsFound(List<PHAccessPoint> accessPointsList) {
             // TODO: verify which access point we're trying to connect to
             accessPointsList.get(0).setUsername(username);
+            notifications.setBridgeStatus(PHNotifications.BridgeStatus.CONNECTING);
             phHueSDK.connect(accessPointsList.get(0));
         }
 
