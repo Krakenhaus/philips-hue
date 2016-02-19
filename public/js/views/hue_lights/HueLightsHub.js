@@ -4,10 +4,12 @@ var HueLightsHub = Backbone.Marionette.LayoutView.extend({
     actionsCenterRegion   : '#hue-lights-actions-center-region'
   },
 
-  model: HueLightsModel,
+  model: new HueLightsModel(),
+
+  className: 'row',
 
   initialize: function() {
-    this.model = new HueLightsModel();
+    //this.model = new HueLightsModel();
     app.radioChannel.on('orchestration:imageWithLights', this.setLightsToImage.bind(this));
   },
 
@@ -33,6 +35,8 @@ var HueLightsHub = Backbone.Marionette.LayoutView.extend({
   / Events that require orchestration
   /***********************************/
   setLightsToImage: function(imageUrl) {
-    this.model.setToImage(imageUrl);
+    // Wait until image is loaded onto chromecast
+    var _this = this;
+    setTimeout(function(){_this.model.setToImage(imageUrl)}, app.preloadWait);
   }
 });
