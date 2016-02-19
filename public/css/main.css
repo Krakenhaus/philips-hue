@@ -1,0 +1,30 @@
+.module {
+  margin-bottom: 15px;
+  background-color: #EEE;
+  border: 1px solid #AAA;
+  border-radius:5px;
+}
+
+.status-unconnected {
+  color: white;
+  padding: 10px;
+  background: repeating-linear-gradient(
+    45deg,
+    #555,
+    #555 10px,
+    #666 10px,
+    #666 20px
+  );
+}
+
+.status-connected {
+  color: black;
+  padding: 10px;
+  background: repeating-linear-gradient(
+    45deg,
+    #75EB00,
+    #75EB00 10px,
+    #6EDE00 10px,
+    #6EDE00 20px
+  );
+}

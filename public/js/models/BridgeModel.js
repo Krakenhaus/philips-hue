@@ -11,7 +11,6 @@ var BridgeModel = Backbone.Model.extend({
       url: '/bridge/connect',
       data: JSON.stringify(permissions),
       success: function() {
-        console.log('success');
       },
       contentType: 'application/json'
     });

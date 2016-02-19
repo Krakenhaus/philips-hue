@@ -6,7 +6,6 @@ var HueLightsModel = Backbone.Model.extend({
       url: '/lights/image',
       data: JSON.stringify({'url': imageUrl}),
       success: function() {
-        console.log('success');
       },
       contentType: 'application/json'
     });

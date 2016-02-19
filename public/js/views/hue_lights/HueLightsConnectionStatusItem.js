@@ -2,12 +2,15 @@ var HueLightsConnectionStatusItem = Backbone.Marionette.ItemView.extend({
   ui: {
     'discoverButton': '#discover-devices',
     'discoverButtonText': '#discover-devices-text',
-    'discoverButtonSpinner': '#discover-devices .spinner'
+    'discoverButtonSpinner': '#discover-devices .spinner',
+    'connectionStatusText': '#hue-lights-connection-status'
   },
 
   events: {
     'click @ui.discoverButton': 'initializeConnection'
   },
+
+  className: 'status-unconnected',
 
   render: function() {
     var _this = this;
@@ -32,8 +35,11 @@ var HueLightsConnectionStatusItem = Backbone.Marionette.ItemView.extend({
       if(status !== 'CONNECTED') {
         setTimeout(function() {_this.pollConnection();}, 200);
       }else{
-         $(_this.ui.discoverButtonText).text('Connected!');
+         $(_this.ui.discoverButtonText).text('Reconnect');
          $(_this.ui.discoverButtonSpinner).removeClass('active');
+         _this.$el.removeClass('status-unconnected');
+         _this.$el.addClass('status-connected');
+         $(_this.ui.connectionStatusText).text('Connected');
       }
     });
   }
